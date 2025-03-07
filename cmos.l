@@ -61,6 +61,7 @@ int main() {
   fstream file("scanner_out.txt", ios::out); 
   int token;
 
+  // Read tokens from input file and write to output file
   while ((token = yylex())) {
     file << setw(3) << setfill('0') << token; 
   }

@@ -7,12 +7,14 @@
 
 using namespace std;
 
+// Structure to store the program name, token and fingerprints
 struct ProgramToken {
   string name;
   string token;
   vector<size_t> fingerprints;
 };
 
+// Structure to store the similarity between two programs
 struct Similarity {
   string name1;
   string name2;
@@ -24,6 +26,7 @@ int main() {
   vector<ProgramToken> programs;
   string name, token;
 
+  // read the program name and token from the file
   while (file >> name >> token) {
     ProgramToken pt = {name, token};
     programs.push_back(pt);
@@ -31,11 +34,13 @@ int main() {
 
   file.close();
 
+  // for each program, calculate the fingerprints
   for (auto &pt : programs) {
     size_t k = 4;
     size_t w = 4;
     hash<string> hasher;
 
+    // calculate the hash value of each 4mer
     vector<size_t> kmer_hashes;
     if (pt.token.length() >= k) {
       for (size_t i = 0; i <= pt.token.length() - k; ++i) {
@@ -45,6 +50,7 @@ int main() {
       }
     }
 
+    // calculate the fingerprint of each window
     for (size_t i = 0; i <= kmer_hashes.size() - w; ++i) {
       size_t min_hash = numeric_limits<size_t>::max();
       for (size_t j = 0; j < w; ++j) {
@@ -58,6 +64,7 @@ int main() {
 
   vector<Similarity> similarities;
 
+  // calculate the similarity between each pair of programs
   for (size_t i = 0; i < programs.size(); ++i) {
     for (size_t j = i + 1; j < programs.size(); ++j) {
       size_t common = 0;
@@ -75,11 +82,13 @@ int main() {
     }
   }
 
+  // sort the similarities in descending order
   sort(similarities.begin(), similarities.end(),
        [](const Similarity &a, const Similarity &b) {
          return a.similarity > b.similarity;
        });
 
+  // print the similarities
   for (const auto &similarity : similarities) {
     cout << similarity.name1 << " " << similarity.name2 << " "
          << similarity.similarity << endl;
