@@ -2,7 +2,6 @@
 
 CXX = g++
 FLEX = flex
-CXXFLAGS = -std=c++11
 
 all: _build/scanner _build/cmos
 
