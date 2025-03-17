@@ -28,13 +28,14 @@ CPP_COMMENT "//".*
 V_NAME [a-zA-Z_][a-zA-Z0-9_]*
 V_TYPE "int"|"char"|"void"|"float"|"double"
 INCLUDE "#include"[\t ]*"<"[a-zA-Z0-9_./]*">"
+INCLUDE_H "#include"[\t ]*"\""[a-zA-Z0-9_./]*"\""
 
 %%
 
 [ \t\n\f\r\v] { /* Ignore whitespace */ }
 {COMMENT} { /* Ignore comments */ }
 {CPP_COMMENT} { /* Ignore comments */ }
-{INCLUDE} { return TK_INCLUDE; }
+{INCLUDE}|{INCLUDE_H} { return TK_INCLUDE; }
 {V_TYPE} { return TK_TYPE; }
 "[" { return TK_L_BRACE; }
 "]" { return TK_R_BRACE; }
