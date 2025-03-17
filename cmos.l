@@ -1,3 +1,6 @@
+//Authors: Colin Murphy & Brock Klamfoth
+//Date: 3/17/25
+
 %{
   #include <iostream>
   #include <fstream>
