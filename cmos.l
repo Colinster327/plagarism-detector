@@ -1,7 +1,9 @@
-//Authors: Colin Murphy & Brock Klamfoth
-//Date: 3/17/25
-
 %{
+
+  /*
+   * Authors: Colin M and Brock K
+  */
+
   #include <iostream>
   #include <fstream>
   #include <iomanip>
